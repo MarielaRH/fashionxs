@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Header = () => {
   return (
-    <header className="h-[70px] bg-black w-full text-white flex justify-between items-center p-5 absolute">
+    <header className="h-[70px] bg-black w-full text-white flex justify-between items-center p-5 fixed z-50">
       <section id="logo">
         <Link href={"/"}>FASHIONXS</Link>
       </section>
@@ -13,7 +13,6 @@ const Header = () => {
         <Link href={"/#landing"}>Home</Link>
         <Link href={"/about"}>About us</Link>
         <Link href={"/#categories"}>Categories</Link>
-        <Link href={"/#trending"}>Trending</Link>
       </section>
 
       <section id="user_options" className="hidden md:flex items-center gap-6">

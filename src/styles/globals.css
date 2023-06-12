@@ -8,6 +8,13 @@
   background-position: center;
 }
 
+.detailProduct {
+  background-image: url("/images/background_product.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+
 :root {
   scroll-behavior: smooth !important;
   /* Works on Firefox */

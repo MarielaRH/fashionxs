@@ -1,7 +1,42 @@
-import React from "react";
+import Loader from "@/components/Loader";
+import ProductCard from "@/components/ProductCard";
+import { Product } from "@/utils/interfaces/products";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import useSWR from "swr";
+
+const fetcher = (url: string) => fetch(url).then((resp) => resp.json());
 
 const Category = () => {
-  return <div className="min-h-screen pt-[70px]">Category</div>;
-};
+  const route = useRouter();
+  const [category, setCategory] = useState<string | null>(null);
 
+  const { data, isLoading, error } = useSWR(
+    category ? `/api/products/${category}` : null,
+    fetcher
+  );
+
+  useEffect(() => {
+    if (route.isReady) {
+      setCategory(`${route.query.category}`);
+    }
+
+  }, [route]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  return (
+    <div className="bg-gray-600 p-5" style={{minHeight: 'calc(100vh - 70px)'}}>
+      <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-5 pt-[70px]">
+        {data
+          ? data.products.map((product: Product) => {
+              return <ProductCard key={product.id} product={product} category={category}/>;
+            })
+          : null}
+      </div>
+    </div>
+  );
+};
 export default Category;
