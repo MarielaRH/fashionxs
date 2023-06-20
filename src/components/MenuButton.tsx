@@ -40,7 +40,6 @@ const MenuButton = () => {
     setOpen(false);
   };
 
-
   const getMenuItem = (menuItem: MENU_OPTIONS_TYPE) => {
     // Checks the menuItem title to assign an icon
     const icon = [];
@@ -51,18 +50,16 @@ const MenuButton = () => {
     } else if (menuItem.title === MENU_OPTIONS[2].title) {
       icon.push(<ShoppingBag sx={ICONS_MENU_CONFIG} />);
     } else if (menuItem.title === MENU_OPTIONS[3].title) {
-      icon.push(<AutoAwesome sx={ICONS_MENU_CONFIG} />);
-    } else if (menuItem.title === MENU_OPTIONS[4].title) {
       icon.push(<Person sx={ICONS_MENU_CONFIG} />);
     } else {
       icon.push(<ShoppingCart sx={ICONS_MENU_CONFIG} />);
     }
 
     // Returns a title-item
-    if (menuItem.title === MENU_OPTIONS[5].title) {
+    if (menuItem.title === MENU_OPTIONS[4].title) {
       return (
-        <div  key={menuItem.id + '_container'}>
-          <Divider/>
+        <div key={menuItem.id + "_container"}>
+          <Divider />
           <MenuItem
             onClick={() => {
               handleClose(menuItem.path);
@@ -93,7 +90,9 @@ const MenuButton = () => {
     <>
       <IconButton
         ref={anchorRef}
-        onClick={()=> {setOpen((prevOpen) => !prevOpen)}}
+        onClick={() => {
+          setOpen((prevOpen) => !prevOpen);
+        }}
         size="small"
         aria-controls={open ? "menu" : undefined}
         aria-haspopup="true"

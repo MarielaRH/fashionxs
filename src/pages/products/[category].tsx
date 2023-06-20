@@ -15,12 +15,12 @@ const Category = () => {
     category ? `/api/products/${category}` : null,
     fetcher
   );
+  console.log(data);
 
   useEffect(() => {
     if (route.isReady) {
       setCategory(`${route.query.category}`);
     }
-
   }, [route]);
 
   if (isLoading) {
@@ -28,11 +28,17 @@ const Category = () => {
   }
 
   return (
-    <div className="bg-gray-600 p-5" style={{minHeight: 'calc(100vh - 70px)'}}>
+    <div className="bg-[#ecc49d] p-5 minHeight">
       <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-5 pt-[70px]">
         {data
           ? data.products.map((product: Product) => {
-              return <ProductCard key={product.id} product={product} category={category}/>;
+              return (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  category={category}
+                />
+              );
             })
           : null}
       </div>

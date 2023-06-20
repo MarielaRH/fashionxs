@@ -1,12 +1,18 @@
+import Button from "@/components/Button";
 import Loader from "@/components/Loader";
 import { Product } from "@/utils/interfaces/products";
-import { StarRounded } from "@mui/icons-material";
-import { url } from "inspector";
+import {
+  ArrowBack,
+  BookmarkBorderOutlined,
+  ShoppingCart,
+  StarRounded,
+} from "@mui/icons-material";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
-
+import styles from "@/styles/components/Category.module.css";
+import CircleButton from "@/components/CircleButton";
 const fetcher = (url: string) => fetch(url).then((resp) => resp.json());
 
 type ResponseType = {
@@ -26,8 +32,11 @@ const ProductDetail = () => {
       fetcher
     );
 
+  console.log(data);
+
   useEffect(() => {
     if (router.isReady) {
+      console.log(router.isReady);
       setCategory(router.query.category ? router.query.category[0] : null);
       setProductId(router.query.category ? router.query.category[1] : null);
     }
@@ -35,48 +44,79 @@ const ProductDetail = () => {
       setCategory(null);
       setProductId(null);
     };
-  }, [router]);
+  }, [router, category, productId]);
 
-  if (isLoading) {
+  if (isLoading || !data) {
     return <Loader />;
   }
 
   return (
-    <div
-      className=" bg-red-200 grid grid-cols-1 md:grid-cols-2 "
-      style={{ minHeight: "calc(100vh - 70px)" }}
-    >
-      {data && (
+    <div className="grid grid-cols-1 md:grid-cols-3 minHeight">
+      {data && data.product && (
         <>
-          <div className="pt-[70px] bg-white  h-full flex justify-center items-center">
-            <div className="p-32">
+          <div className="pt-[70px] bg-white  h-full flex justify-center items-center maxHeight">
+            <div className="py-32">
               <Image
                 alt="product_image"
                 src={data.product.image}
                 height={400}
-                width={300}
+                width={250}
                 style={{ maxWidth: "400px" }}
               ></Image>
             </div>
           </div>
 
-          <div className="p-[70px] h-full bg-red-600 flex flex-col items-center justify-center">
-            <p className="text-3xl font-light pb-10">{data.product.title}</p>
+          <div className="md:overflow-y-auto md:maxHeight col-span-2 bg-[#f4e5d7] md:rounded-l-full">
+            <div
+              style={{ minHeight: "calc(100vh - 140px)" }}
+              className={
+                "md:mt-[70px] p-[70px] md:py-[70px] md:pl-[120px] md:pr-[40px] md:overflow-auto  flex flex-col items-center justify-center gap-8 relative"
+              }
+            >
+              <p className="text-3xl font-normal text-center">
+                {data.product.title}
+              </p>
 
-            <p className="text-base font-extralight">
-              {data.product.description}
-            </p>
+              <p className="text-base font-light leading-6 tracking-wide text-justify">
+                {data.product.description}
+              </p>
 
-            <div className="flex items-center gap-1 ">
-              <p className="font-semibold">{data.product.rating.rate}</p>
-              <StarRounded style={{ color: "#f6ab3b" }} />
+              <div className="flex  gap-4 w-full">
+                <div className="flex items-center justify-center gap-1 border-zinc-400 border text-zinc-500 font-semibold px-3 text-center rounded-2xl">
+                  <p className="font-extrabold">{data.product.rating.rate}</p>
+                  <StarRounded style={{ color: "#f6ab3b" }} />
+                </div>
+
+                <div className=" border-zinc-400 text-zinc-500 font-semibold border px-3 rounded-2xl text-center">
+                  {data.product.category}
+                </div>
+              </div>
+              <div className="flex w-full justify-end items-center gap-1 font-extrabold">
+                <p className="text-md font-light">$</p>
+                <p className="text-4xl"> {data.product.price}</p>
+              </div>
+
+              <div className="flex flex-col  sm:flex-row w-full justify-end items-end gap-5">
+                <CircleButton
+                  label="Back"
+                  handler={() => router.push(`/products/${category}`)}
+                >
+                  <ArrowBack className="text-xl" />
+                </CircleButton>
+                <CircleButton
+                  label="Buy Now"
+                  handler={() => console.log("product added in cart")}
+                >
+                  <ShoppingCart className="text-xl" />
+                </CircleButton>
+                <CircleButton
+                  label="Save"
+                  handler={() => console.log("product added in cart")}
+                >
+                  <BookmarkBorderOutlined className="text-xl" />
+                </CircleButton>
+              </div>
             </div>
-
-            <div className="flex justify-center items-center gap-1 font-semibold">
-              <p className="text-md font-light">$</p>
-              <p className="text-2xl"> {data.product.price}</p>
-            </div>
-            {data.product.category}
           </div>
         </>
       )}

@@ -5,44 +5,38 @@ export const ICONS_MENU_CONFIG = {
 };
 
 export type MENU_OPTIONS_TYPE = {
-    id: string,
-    title: string,
-    path: string
-}
+  id: string;
+  title: string;
+  path: string;
+};
 
 export const MENU_OPTIONS: MENU_OPTIONS_TYPE[] = [
   {
-    id:'xs_home',
+    id: "xs_home",
     title: "Home",
     path: "/#landing",
   },
   {
-    id:'xs_about',
+    id: "xs_about",
     title: "About us",
     path: "/about",
   },
   {
-    id:'xs_categories',
+    id: "xs_categories",
     title: "Categories",
     path: "/#categories",
   },
   {
-    id:'xs_trending',
-    title: "Trending",
-    path: "/#trending",
-  },
-  {
-    id:'xs_account',
+    id: "xs_account",
     title: "My account",
     path: "/profile",
   },
   {
-    id:'xs_cart',
+    id: "xs_cart",
     title: "Cart",
     path: "/cart",
   },
 ];
-
 
 export const PAPER_STYLE = {
   overflow: "visible",
