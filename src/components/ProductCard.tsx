@@ -7,10 +7,22 @@ import {
 import Image from "next/image";
 import TooltipIcon from "./TooltipIcon";
 import { Product } from "@/utils/interfaces/products";
+import styles from "@/styles/components/Category.module.css";
 
-const ProductCard = ({ product, category }: { product: Product, category: string | null}) => {
+const ProductCard = ({
+  product,
+  category,
+}: {
+  product: Product;
+  category: string | null;
+}) => {
   return (
-    <div className="bg-neutral-900  m-2 max-h-full text-white flex flex-col justify-between rounded-md">
+    <div
+      className={
+        styles.box_shadow +
+        " bg-neutral-900  m-2 max-h-full text-white flex flex-col justify-between rounded-md"
+      }
+    >
       <div className=" min-h-[320px] bg-white flex justify-center items-center rounded-t-md">
         <Image
           src={product.image}
@@ -29,11 +41,19 @@ const ProductCard = ({ product, category }: { product: Product, category: string
             <StarRounded style={{ color: "#f6ab3b" }} />
           </div>
           <div className="flex gap-1">
-            <TooltipIcon title="Agregrar a favoritos"  redirectPath={product.id} category={category}>
+            <TooltipIcon
+              title="Agregrar a favoritos"
+              redirectPath={product.id}
+              category={category}
+            >
               <TurnedInNot className="text-white" />
             </TooltipIcon>
 
-            <TooltipIcon title="Ver detalle" redirectPath={product.id} category={category}>
+            <TooltipIcon
+              title="Ver detalle"
+              redirectPath={product.id}
+              category={category}
+            >
               <ArrowOutward className="text-white" />
             </TooltipIcon>
           </div>

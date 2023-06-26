@@ -28,7 +28,7 @@ const Category = () => {
   }
 
   return (
-    <div className="bg-[#ecc49d] p-5 minHeight">
+    <div className="p-5 minHeight bg-1">
       <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-5 pt-[70px]">
         {data
           ? data.products.map((product: Product) => {

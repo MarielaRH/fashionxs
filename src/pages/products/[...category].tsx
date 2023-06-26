@@ -1,4 +1,3 @@
-import Button from "@/components/Button";
 import Loader from "@/components/Loader";
 import { Product } from "@/utils/interfaces/products";
 import {
@@ -11,7 +10,6 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
-import styles from "@/styles/components/Category.module.css";
 import CircleButton from "@/components/CircleButton";
 const fetcher = (url: string) => fetch(url).then((resp) => resp.json());
 
@@ -54,7 +52,7 @@ const ProductDetail = () => {
     <div className="grid grid-cols-1 md:grid-cols-3 minHeight">
       {data && data.product && (
         <>
-          <div className="pt-[70px] bg-white  h-full flex justify-center items-center maxHeight">
+          <div className="pt-[70px]  h-full flex justify-center items-center maxHeight">
             <div className="py-32">
               <Image
                 alt="product_image"
@@ -66,11 +64,11 @@ const ProductDetail = () => {
             </div>
           </div>
 
-          <div className="md:overflow-y-auto md:maxHeight col-span-2 bg-[#f4e5d7] md:rounded-l-full">
+          <div className="md:overflow-y-auto md:maxHeight col-span-2 bg-2 md:rounded-l-full">
             <div
               style={{ minHeight: "calc(100vh - 140px)" }}
               className={
-                "md:mt-[70px] p-[70px] md:py-[70px] md:pl-[120px] md:pr-[40px] md:overflow-auto  flex flex-col items-center justify-center gap-8 relative"
+                "md:mt-[70px] p-[70px] md:py-[70px] md:pl-[120px] md:pr-[40px] md:overflow-auto  flex flex-col items-center justify-center gap-8 relative bg-slate-300/50"
               }
             >
               <p className="text-3xl font-normal text-center">

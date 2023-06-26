@@ -16,11 +16,18 @@ const Header = () => {
       </section>
 
       <section id="user_options" className="hidden md:flex items-center gap-6">
-        <span className="flex py-1 px-4 gap-2 bg-slate-800 rounded-full">
-          <ShoppingCart />
-          <span>$ 0</span>
-        </span>
-        <AccountCircle fontSize="large" />
+        <Link href={"/cart"}>
+          <span className="flex py-1 px-4 gap-2 bg-slate-800 rounded-full">
+            <ShoppingCart />
+            <span>$ 0</span>
+          </span>
+        </Link>
+        <Link href={"/profile"}>
+          {/* <AccountCircle fontSize="large" /> */}
+        </Link>
+        <Link href={"/api/auth/login"}>Login</Link>
+
+        <Link href={"/api/auth/logout"}>Logout</Link>
       </section>
       <section id="menu_options" className="flex md:hidden">
         <MenuButton />

@@ -1,5 +1,9 @@
 const Cart = () => {
-  return <div className="min-h-screen pt-[70px]">Cart</div>;
+  return (
+    <div className="pt-[70px] bg-1" style={{ height: "calc(100vh - 70px)" }}>
+      cart
+    </div>
+  );
 };
 
 export default Cart;

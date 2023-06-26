@@ -5,14 +5,12 @@ import Button from "@/components/Button";
 
 const inter = Inter({ subsets: ["latin"] });
 
-
 export default function Home() {
-
   return (
     <>
       {/* LANDING SECTION */}
       <section className="landing  h-screen" id="landing">
-        <div className="bg-black/30 h-full w-full flex flex-col justify-center items-center text-white">
+        <div className="bg-black/50 h-full w-full flex flex-col justify-center items-center text-white">
           <p className=" text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold">
             FASHIONXS
           </p>
@@ -24,11 +22,8 @@ export default function Home() {
       </section>
 
       {/* CATEGORIES SECTION */}
-      <section
-        className="bg-gray-400 flex flex-col h-screen"
-        id="categories"
-      >
-        <div className="pt-28 flex items-center justify-center text-4xl font-extrabold  text-white ">
+      <section className="bg-2 flex flex-col min-h-screen" id="categories">
+        <div className="pt-28 flex items-center justify-center text-4xl font-extrabold">
           CATEGORIES
         </div>
 

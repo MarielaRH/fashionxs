@@ -8,6 +8,18 @@
   background-position: center;
 }
 
+.bg-1 {
+  background-image: url("/images/bg-1.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-2 {
+  background-image: url("/images/bg-2.png");
+  background-size: cover;
+  background-position: center;
+}
+
 .detailProduct {
   background-image: url("/images/background_product.jpg");
   background-size: cover;

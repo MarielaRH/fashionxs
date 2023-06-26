@@ -20,8 +20,10 @@ const CategoryCard = ({ category }: { category: CategoriesType }) => {
       }}
     >
       <span className="hidden group-hover:flex flex-col justify-center items-center h-full w-auto group-hover:bg-black/40">
-        <p className="text-2xl font-semibold pb-10 text-center">{category.title.toUpperCase()}</p>
-        <Button label="shop now"  handler={handlerClick}/>
+        <p className="text-2xl font-semibold pb-10 text-center">
+          {category.title.toUpperCase()}
+        </p>
+        <Button label="shop now" handler={handlerClick} />
       </span>
     </div>
   );
