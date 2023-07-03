@@ -28,7 +28,7 @@ export const CartContextProvider = ({
       }
       setFirstLoadPage(true);
     }
-  }, [cart]);
+  }, [cart, firstLoadPage]);
 
   const addToCart = (product: Product) => {
     setCart([...cart, product]);
