@@ -35,7 +35,6 @@ const MenuButton = () => {
 
   // closes menu
   const handleClose = (path?: string) => {
-    console.log(path);
     if (path === "/api/auth/logout") {
       localStorage.removeItem("cart");
       router.push(path);

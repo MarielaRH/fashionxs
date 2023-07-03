@@ -23,8 +23,8 @@ type ResponseType = {
 
 const ProductDetail = () => {
   const router = useRouter();
-  const { cart, addToCart } = useContext(CartContext);
-  const { error, isLoading: isLoadingUser, user } = useUser();
+  const { addToCart } = useContext(CartContext);
+  const { user } = useUser();
   const [productId, setProductId] = useState<string | null>(null);
   const [category, setCategory] = useState<string | null>(null);
 
@@ -34,11 +34,8 @@ const ProductDetail = () => {
       fetcher
     );
 
-  console.log(data);
-
   useEffect(() => {
     if (router.isReady) {
-      console.log(router.isReady);
       setCategory(router.query.category ? router.query.category[0] : null);
       setProductId(router.query.category ? router.query.category[1] : null);
     }
@@ -114,10 +111,7 @@ const ProductDetail = () => {
                     >
                       <ShoppingCart className="text-xl" />
                     </CircleButton>
-                    <CircleButton
-                      label="Save"
-                      handler={() => console.log("product added in cart")}
-                    >
+                    <CircleButton label="Save" handler={() => {}}>
                       <BookmarkBorderOutlined className="text-xl" />
                     </CircleButton>
                   </>

@@ -4,7 +4,6 @@ import { AccountCircleRounded, Email } from "@mui/icons-material";
 
 const Profile = () => {
   const { error, isLoading, user } = useUser();
-  console.log(user);
 
   const profileCards = [
     {
