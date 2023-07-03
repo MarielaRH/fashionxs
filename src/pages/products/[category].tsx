@@ -15,7 +15,6 @@ const Category = () => {
     category ? `/api/products/${category}` : null,
     fetcher
   );
-  console.log(data);
 
   useEffect(() => {
     if (route.isReady) {
@@ -23,12 +22,16 @@ const Category = () => {
     }
   }, [route]);
 
+  if (error) {
+    return <div>Algo salió mal</div>;
+  }
+
   if (isLoading) {
     return <Loader />;
   }
 
   return (
-    <div className="p-5 minHeight bg-1">
+    <div className="p-5 minHeight bg-2">
       <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-5 pt-[70px]">
         {data
           ? data.products.map((product: Product) => {

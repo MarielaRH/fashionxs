@@ -10,10 +10,10 @@ import { useRef, useState } from "react";
 import MenuList from "@mui/material/MenuList";
 import Grow from "@mui/material/Grow";
 import {
-  AutoAwesome,
+  AccountCircle,
   Home,
   Info,
-  Menu,
+  Logout,
   Person,
   ShoppingBag,
   ShoppingCart,
@@ -25,15 +25,21 @@ import {
   MENU_OPTIONS_TYPE,
   PAPER_STYLE,
 } from "@/utils/constants/menu";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 const MenuButton = () => {
   const [open, setOpen] = useState(false);
+  const { error, isLoading, user } = useUser();
   const anchorRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
 
   // closes menu
   const handleClose = (path?: string) => {
-    if (path) {
+    console.log(path);
+    if (path === "/api/auth/logout") {
+      localStorage.removeItem("cart");
+      router.push(path);
+    } else if (path) {
       router.push(path);
     }
 
@@ -49,10 +55,14 @@ const MenuButton = () => {
       icon.push(<Info sx={ICONS_MENU_CONFIG} />);
     } else if (menuItem.title === MENU_OPTIONS[2].title) {
       icon.push(<ShoppingBag sx={ICONS_MENU_CONFIG} />);
-    } else if (menuItem.title === MENU_OPTIONS[3].title) {
+    } else if (menuItem.title === MENU_OPTIONS[3].title && user) {
       icon.push(<Person sx={ICONS_MENU_CONFIG} />);
-    } else {
+    } else if (menuItem.title === MENU_OPTIONS[4].title && user) {
       icon.push(<ShoppingCart sx={ICONS_MENU_CONFIG} />);
+    } else if (menuItem.title === MENU_OPTIONS[5].title && user) {
+      icon.push(<Logout sx={ICONS_MENU_CONFIG} />);
+    } else {
+      return;
     }
 
     // Returns a title-item
@@ -98,7 +108,7 @@ const MenuButton = () => {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
       >
-        <Menu sx={{ with: 32, height: 32, color: "white" }} />
+        <AccountCircle fontSize="large" sx={{ color: "white" }} />
       </IconButton>
       <Popper
         open={open}
@@ -113,7 +123,7 @@ const MenuButton = () => {
             {...TransitionProps}
             style={{
               transformOrigin: (placement = "top"),
-              marginTop: -5,
+              marginTop: 0,
               paddingLeft: 8,
               paddingRight: 8,
             }}

@@ -11,13 +11,17 @@ import { useEffect } from "react";
 type PropsType = {
   children: React.ReactNode;
   title: string;
-  category: string | null;
+  category?: string | null;
   redirectPath: string | number;
 };
 
-const TooltipIcon = ({ children, title, category ,redirectPath }: PropsType) => {
+const TooltipIcon = ({
+  children,
+  title,
+  category,
+  redirectPath,
+}: PropsType) => {
   const router = useRouter();
-
 
   const redirect = () => {
     router.push(`${category}/${redirectPath}`);

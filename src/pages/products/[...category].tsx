@@ -8,9 +8,11 @@ import {
 } from "@mui/icons-material";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useSWR from "swr";
 import CircleButton from "@/components/CircleButton";
+import { useUser } from "@auth0/nextjs-auth0/client";
+import { CartContext } from "@/context/cartContext";
 const fetcher = (url: string) => fetch(url).then((resp) => resp.json());
 
 type ResponseType = {
@@ -21,6 +23,8 @@ type ResponseType = {
 
 const ProductDetail = () => {
   const router = useRouter();
+  const { cart, addToCart } = useContext(CartContext);
+  const { error, isLoading: isLoadingUser, user } = useUser();
   const [productId, setProductId] = useState<string | null>(null);
   const [category, setCategory] = useState<string | null>(null);
 
@@ -101,18 +105,23 @@ const ProductDetail = () => {
                 >
                   <ArrowBack className="text-xl" />
                 </CircleButton>
-                <CircleButton
-                  label="Buy Now"
-                  handler={() => console.log("product added in cart")}
-                >
-                  <ShoppingCart className="text-xl" />
-                </CircleButton>
-                <CircleButton
-                  label="Save"
-                  handler={() => console.log("product added in cart")}
-                >
-                  <BookmarkBorderOutlined className="text-xl" />
-                </CircleButton>
+
+                {user && (
+                  <>
+                    <CircleButton
+                      label="Buy now"
+                      handler={() => addToCart(data.product)}
+                    >
+                      <ShoppingCart className="text-xl" />
+                    </CircleButton>
+                    <CircleButton
+                      label="Save"
+                      handler={() => console.log("product added in cart")}
+                    >
+                      <BookmarkBorderOutlined className="text-xl" />
+                    </CircleButton>
+                  </>
+                )}
               </div>
             </div>
           </div>

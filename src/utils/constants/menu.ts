@@ -36,6 +36,11 @@ export const MENU_OPTIONS: MENU_OPTIONS_TYPE[] = [
     title: "Cart",
     path: "/cart",
   },
+  {
+    id: "xs_logout",
+    title: "Logout",
+    path: "/api/auth/logout",
+  },
 ];
 
 export const PAPER_STYLE = {
@@ -53,8 +58,8 @@ export const PAPER_STYLE = {
     content: '""',
     display: "block",
     position: "absolute",
-    top: 0,
-    right: 12,
+    top: 1,
+    right: 17,
     width: 10,
     height: 10,
     bgcolor: "background.paper",

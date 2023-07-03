@@ -1,5 +1,6 @@
 import {
   ArrowOutward,
+  Delete,
   ShoppingCart,
   StarRounded,
   TurnedInNot,
@@ -8,14 +9,24 @@ import Image from "next/image";
 import TooltipIcon from "./TooltipIcon";
 import { Product } from "@/utils/interfaces/products";
 import styles from "@/styles/components/Category.module.css";
+import { useUser } from "@auth0/nextjs-auth0/client";
+import { useContext } from "react";
+import { CartContext } from "@/context/cartContext";
 
 const ProductCard = ({
   product,
   category,
 }: {
   product: Product;
-  category: string | null;
+  category?: string | null;
 }) => {
+  const { error, isLoading, user } = useUser();
+  const { cart, addToCart } = useContext(CartContext);
+
+  const addProductToCart = (product: Product) => {
+    addToCart(product);
+  };
+
   return (
     <div
       className={
@@ -41,36 +52,45 @@ const ProductCard = ({
             <StarRounded style={{ color: "#f6ab3b" }} />
           </div>
           <div className="flex gap-1">
-            <TooltipIcon
-              title="Agregrar a favoritos"
-              redirectPath={product.id}
-              category={category}
-            >
-              <TurnedInNot className="text-white" />
-            </TooltipIcon>
+            {user && category && (
+              <TooltipIcon
+                title="Agregrar a favoritos"
+                redirectPath={product.id}
+                category={category}
+              >
+                <TurnedInNot className="text-white" />
+              </TooltipIcon>
+            )}
 
-            <TooltipIcon
-              title="Ver detalle"
-              redirectPath={product.id}
-              category={category}
-            >
-              <ArrowOutward className="text-white" />
-            </TooltipIcon>
+            {category && (
+              <TooltipIcon
+                title="Ver detalle"
+                redirectPath={product.id}
+                category={category}
+              >
+                <ArrowOutward className="text-white" />
+              </TooltipIcon>
+            )}
           </div>
         </section>
 
         <div className="flex justify-center items-center gap-1 font-semibold">
           <p className="text-md font-light">$</p>
-          <p className="text-2xl"> {product.price}</p>
+          <p className="text-2xl">{product.price}</p>
         </div>
         <p className="font-thin flex items-center justify-center text-center p-3 h-auto">
           {product.title}
         </p>
 
-        <div className="flex gap-2 font-medium items-center justify-center p-[12px] rounded-sm hover:scale-95 hover:cursor-pointer transition-all duration-300 bg-neutral-500/20 text-white">
-          <ShoppingCart className="text-xl" />
-          <span>Add to card</span>
-        </div>
+        {user && category && (
+          <div
+            className="flex gap-2 font-medium items-center justify-center p-[12px] rounded-sm hover:scale-95 hover:cursor-pointer transition-all duration-300 bg-neutral-500/20 text-white"
+            onClick={() => addProductToCart(product)}
+          >
+            <ShoppingCart className="text-xl" />
+            <span>Add to card</span>
+          </div>
+        )}
       </div>
     </div>
   );
